@@ -13,6 +13,7 @@ class User {
   Adress adress;
   CreditCard creditCard;
   bool? isPremium;
+  String? image;
 
   User(
       {required this.id,
@@ -25,5 +26,6 @@ class User {
       required this.birth,
       required this.adress,
       required this.creditCard,
-      this.isPremium});
+      this.isPremium,
+      this.image});
 }
