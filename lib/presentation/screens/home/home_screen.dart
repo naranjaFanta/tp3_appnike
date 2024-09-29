@@ -38,6 +38,12 @@ class HomeScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
+              appRouter.push('/discounts/1');
+            },
+            child: const Text('Discounts Detail'),
+          ),
+          ElevatedButton(
+            onPressed: () {
               appRouter.push('/profile');
             },
             child: const Text('Profile Screen'),

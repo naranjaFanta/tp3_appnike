@@ -1,3 +1,4 @@
+import 'package:appnike/presentation/screens/discounts/discount_detail.dart';
 import 'package:appnike/presentation/screens/discounts/discounts_screen.dart';
 import 'package:appnike/presentation/screens/home/home_screen.dart';
 import 'package:appnike/presentation/screens/login/login_screen.dart';
@@ -30,6 +31,10 @@ final appRouter = GoRouter(
         path: '/discounts',
         name: DiscountsScreen.name,
         builder: (context, state) => const DiscountsScreen()),
+    GoRoute(
+        path: '/discounts/1', //Hay que hacerlo dinamico
+        name: DiscountDetail.name,
+        builder: (context, state) => const DiscountDetail()),
     GoRoute(
         path: '/profile',
         name: ProfileScreen.name,
