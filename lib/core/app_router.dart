@@ -22,7 +22,7 @@ final appRouter = GoRouter(
     GoRoute(
         path: '/products',
         name: ProductsScreen.name,
-        builder: (context, state) => const ProductsScreen()),
+        builder: (context, state) => ProductsScreen()),
     GoRoute(
         path: '/products/1', //Hay que hacerlo dinamico
         name: ProfileDetail.name,
