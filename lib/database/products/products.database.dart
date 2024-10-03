@@ -8,7 +8,8 @@ List<Product> productsDB = [
         'Las clásicas zapatillas Nike Air Force 1, ahora con un toque moderno.',
     type: 'Casual',
     price: 129.99,
-    image: 'assets/images/nike_air_force_1.jpg',
+    image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRv45TDdXDVPDiCctILmVGIMO9cwvJWA1_Fg&s',
     isNew: true,
   ),
   Product(
@@ -18,7 +19,8 @@ List<Product> productsDB = [
         'Zapatillas de running de alta performance con tecnología Boost.',
     type: 'Running',
     price: 189.99,
-    image: 'assets/images/adidas_ultraboost_23.jpg',
+    image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRv45TDdXDVPDiCctILmVGIMO9cwvJWA1_Fg&s',
     isNew: false,
   ),
   Product(
@@ -27,7 +29,8 @@ List<Product> productsDB = [
     description: 'Las icónicas Puma Suede, un básico para cualquier armario.',
     type: 'Casual',
     price: 99.99,
-    image: 'assets/images/puma_suede.jpg',
+    image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRv45TDdXDVPDiCctILmVGIMO9cwvJWA1_Fg&s',
     isNew: false,
   ),
   Product(
@@ -36,7 +39,8 @@ List<Product> productsDB = [
     description: 'Un clásico atemporal con un diseño versátil.',
     type: 'Casual',
     price: 89.99,
-    image: 'assets/images/new_balance_574.jpg',
+    image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRv45TDdXDVPDiCctILmVGIMO9cwvJWA1_Fg&s',
     isNew: false,
   ),
   Product(
@@ -45,7 +49,8 @@ List<Product> productsDB = [
     description: 'Zapatillas de edición limitada diseñadas por Kanye West.',
     type: 'Streetwear',
     price: 399.99,
-    image: 'assets/images/adidas_yeezy_boost_350.jpg',
+    image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRv45TDdXDVPDiCctILmVGIMO9cwvJWA1_Fg&s',
     isNew: false,
   ),
   Product(
@@ -54,7 +59,8 @@ List<Product> productsDB = [
     description: 'Un modelo icónico que nunca pasa de moda.',
     type: 'Casual',
     price: 119.99,
-    image: 'assets/images/nike_dunk_low.jpg',
+    image:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRv45TDdXDVPDiCctILmVGIMO9cwvJWA1_Fg&s',
     isNew: true,
   ),
 ];
