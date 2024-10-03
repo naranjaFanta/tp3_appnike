@@ -1,5 +1,6 @@
 import 'package:appnike/domain/products/product.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -8,24 +9,29 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      margin: const EdgeInsets.all(10),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            leading: Image.network(product.image,
-                width: 50, height: 50, fit: BoxFit.cover),
-            title: Text(product.name,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text(product.description),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Price: \$${product.price.toStringAsFixed(2)}'),
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        context.push('/products/${product.id}');
+      },
+      child: Card(
+        elevation: 4,
+        margin: const EdgeInsets.all(10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Image.network(product.image,
+                  width: 50, height: 50, fit: BoxFit.cover),
+              title: Text(product.name,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(product.description),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Price: \$${product.price.toStringAsFixed(2)}'),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -24,9 +24,13 @@ final appRouter = GoRouter(
         name: ProductsScreen.name,
         builder: (context, state) => ProductsScreen()),
     GoRoute(
-        path: '/products/1', //Hay que hacerlo dinamico
-        name: ProfileDetail.name,
-        builder: (context, state) => const ProfileDetail()),
+      path: '/products/:id',
+      name: ProductDetail.name,
+      builder: (context, state) {
+        final productId = state.pathParameters['id'];
+        return ProductDetail(productId: int.parse(productId!));
+      },
+    ),
     GoRoute(
         path: '/discounts',
         name: DiscountsScreen.name,
