@@ -26,49 +26,57 @@ class HomeScreen extends StatelessWidget {
               title: const Text('Login Screen'),
               onTap: () {
                 appRouter.push('/login');
-               // Navigator.pop(context); // Cierra el drawer
               },
             ),
             ListTile(
               title: const Text('Products Screen'),
               onTap: () {
                 appRouter.push('/products');
-                //Navigator.pop(context); // Cierra el drawer
               },
             ),
             ListTile(
               title: const Text('Discounts Screen'),
               onTap: () {
                 appRouter.push('/discounts');
-                //Navigator.pop(context); // Cierra el drawer
               },
             ),
             ListTile(
               title: const Text('Discounts Detail'),
               onTap: () {
                 appRouter.push('/discounts/1');
-                //Navigator.pop(context); // Cierra el drawer
               },
             ),
             ListTile(
               title: const Text('Profile Screen'),
               onTap: () {
                 appRouter.push('/profile');
-                //Navigator.pop(context); // Cierra el drawer
               },
             ),
             ListTile(
               title: const Text('Profile Form'),
               onTap: () {
                 appRouter.push('/profile/new');
-               // Navigator.pop(context); // Cierra el drawer
               },
             ),
           ],
         ),
       ),
       body: Center(
-        child: const Text('Welcome to the Home Screen!'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Welcome to Nike Store Home!',
+              style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20), // Espaciado entre el texto y la imagen
+            Image.asset(
+              'assets/image/appnike.jpg',  // Cambia "imagen.jpg" por el nombre real de tu archivo de imagen
+              height: 200, // Altura de la imagen (puedes ajustarlo)
+              fit: BoxFit.cover, // Ajuste de la imagen
+            ),
+          ],
+        ),
       ),
     );
   }
