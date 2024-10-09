@@ -8,46 +8,68 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Home Screen')),
-        body: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          ElevatedButton(
-            onPressed: () {
-              appRouter.push('/login');
-            },
-            child: const Text('Login Screen'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              appRouter.push('/products');
-            },
-            child: const Text('Products Screen'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              appRouter.push('/discounts');
-            },
-            child: const Text('Discounts Screen'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              appRouter.push('/discounts/1');
-            },
-            child: const Text('Discounts Detail'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              appRouter.push('/profile');
-            },
-            child: const Text('Profile Screen'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              appRouter.push('/profile/new');
-            },
-            child: const Text('Profile Form'),
-          ),
-        ])));
+      appBar: AppBar(title: const Text('Home Screen')),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              child: Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: const Text('Login Screen'),
+              onTap: () {
+                appRouter.push('/login');
+               // Navigator.pop(context); // Cierra el drawer
+              },
+            ),
+            ListTile(
+              title: const Text('Products Screen'),
+              onTap: () {
+                appRouter.push('/products');
+                //Navigator.pop(context); // Cierra el drawer
+              },
+            ),
+            ListTile(
+              title: const Text('Discounts Screen'),
+              onTap: () {
+                appRouter.push('/discounts');
+                //Navigator.pop(context); // Cierra el drawer
+              },
+            ),
+            ListTile(
+              title: const Text('Discounts Detail'),
+              onTap: () {
+                appRouter.push('/discounts/1');
+                //Navigator.pop(context); // Cierra el drawer
+              },
+            ),
+            ListTile(
+              title: const Text('Profile Screen'),
+              onTap: () {
+                appRouter.push('/profile');
+                //Navigator.pop(context); // Cierra el drawer
+              },
+            ),
+            ListTile(
+              title: const Text('Profile Form'),
+              onTap: () {
+                appRouter.push('/profile/new');
+               // Navigator.pop(context); // Cierra el drawer
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Center(
+        child: const Text('Welcome to the Home Screen!'),
+      ),
+    );
   }
 }
