@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1018101505082",
+    "project_id": "tp3-nike",
+    "storage_bucket": "tp3-nike.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018101505082:android:8f29afd1c8886cfa042903",
+        "android_client_info": {
+          "package_name": "com.tp3nike.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjO9Pycz4G31Uea7v1_H4pZzIWoG2OMgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
