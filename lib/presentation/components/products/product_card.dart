@@ -15,20 +15,44 @@ class ProductCard extends StatelessWidget {
       },
       child: Card(
         elevation: 4,
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(5),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            ListTile(
-              leading: Image.network(product.image,
-                  width: 50, height: 50, fit: BoxFit.cover),
-              title: Text(product.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text(product.description),
+            Image.network(
+              product.image,
+              width: double.infinity,
+              height: 100,
+              fit: BoxFit.cover,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Price: \$${product.price.toStringAsFixed(2)}'),
+            if ((product.isNew ?? false))
+              const Padding(
+                padding: EdgeInsets.all(6),
+                child: Text(
+                  'Nuevo',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 215, 195, 104),
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ListTile(
+              title: Text(
+                product.name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+              subtitle: Text(product.type),
+              trailing: Text(
+                '\$${product.price}',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),

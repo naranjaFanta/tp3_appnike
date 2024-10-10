@@ -14,7 +14,14 @@ class ProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Products Screen'),
       ),
-      body: ListView.builder(
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 1.5,
+        ),
+        padding: const EdgeInsets.all(10),
         itemCount: products.length,
         itemBuilder: (context, index) {
           final product = products[index];

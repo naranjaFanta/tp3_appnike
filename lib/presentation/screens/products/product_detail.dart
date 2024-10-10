@@ -16,20 +16,48 @@ class ProductDetail extends StatelessWidget {
         title: Text(product.name),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.network(product.image),
+            Center(
+              child: Image.network(
+                product.image,
+              ),
+            ),
             const SizedBox(height: 16),
+            if ((product.isNew ?? false))
+              const Padding(
+                padding: EdgeInsets.only(bottom: 8),
+                child: Text(
+                  'Nuevo',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 215, 195, 104),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
             Text(product.name,
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Text(product.description),
             const SizedBox(height: 16),
-            Text('Price: \$${product.price.toStringAsFixed(2)}',
-                style: const TextStyle(fontSize: 18)),
+            Text('Precio: \$${product.price}',
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                child: const Text('Agregar al carrito'),
+              ),
+            ),
           ],
         ),
       ),
