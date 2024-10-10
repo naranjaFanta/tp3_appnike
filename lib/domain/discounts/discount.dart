@@ -1,4 +1,5 @@
 class Discount {
+  int id;
   String business;
   String description;
   String type;
@@ -7,7 +8,8 @@ class Discount {
   String image;
 
   Discount(
-      {required this.business,
+      {required this.id,
+      required this.business,
       required this.description,
       required this.type,
       required this.regular,
