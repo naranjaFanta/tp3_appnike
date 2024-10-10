@@ -34,11 +34,15 @@ final appRouter = GoRouter(
     GoRoute(
         path: '/discounts',
         name: DiscountsScreen.name,
-        builder: (context, state) => const DiscountsScreen()),
+        builder: (context, state) => DiscountsScreen()),
     GoRoute(
-        path: '/discounts/1', //Hay que hacerlo dinamico
-        name: DiscountDetail.name,
-        builder: (context, state) => const DiscountDetail()),
+      path: '/discounts/:id',
+      name: DiscountDetail.name,
+      builder: (context, state) {
+        final discountId = state.pathParameters['id'];
+        return DiscountDetail(discountId: int.parse(discountId!));
+      },
+    ),
     GoRoute(
         path: '/profile',
         name: ProfileScreen.name,
