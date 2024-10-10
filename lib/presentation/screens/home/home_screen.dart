@@ -41,12 +41,6 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('Discounts Detail'),
-              onTap: () {
-                appRouter.push('/discounts/1');
-              },
-            ),
-            ListTile(
               title: const Text('Profile Screen'),
               onTap: () {
                 appRouter.push('/profile');
@@ -71,7 +65,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20), // Espaciado entre el texto y la imagen
             Image.asset(
-              'assets/image/appnike.jpg',  // Cambia "imagen.jpg" por el nombre real de tu archivo de imagen
+              'assets/image/appnike.jpg', // Cambia "imagen.jpg" por el nombre real de tu archivo de imagen
               height: 200, // Altura de la imagen (puedes ajustarlo)
               fit: BoxFit.cover, // Ajuste de la imagen
             ),
