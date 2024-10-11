@@ -1,4 +1,5 @@
 class Adress {
+  int userId;
   String street;
   int number;
   String? floor;
@@ -8,7 +9,8 @@ class Adress {
   String? postalCode;
 
   Adress(
-      {required this.street,
+      {required this.userId,
+      required this.street,
       required this.number,
       this.floor,
       this.appartment,
