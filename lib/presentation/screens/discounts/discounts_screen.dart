@@ -15,11 +15,11 @@ class DiscountsScreen extends StatelessWidget {
         title: const Text('Discounts Screen'),
       ),
       body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 1.5,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount:2, // Puedes cambiar esto a 3 si necesitas más columnas
+          crossAxisSpacing: 15,
+          mainAxisSpacing: 15,
+          childAspectRatio: 0.6, // Ajusta este valor para cambiar la altura
         ),
         padding: const EdgeInsets.all(10),
         itemCount: discounts.length,

@@ -6,9 +6,17 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  
+  // Inicialización de Firebase
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    print('Firebase conectado exitosamente'); // Mensaje de éxito en la consola
+  } catch (e) {
+    print('Error conectando a Firebase: $e'); // Mensaje de error en la consola
+  }
+
   runApp(
     const ProviderScope(child: MainApp()),
   );
