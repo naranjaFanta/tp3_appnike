@@ -1,5 +1,6 @@
 import 'package:appnike/domain/user/adress.dart';
 import 'package:appnike/domain/user/credit_card.dart';
+import 'package:appnike/domain/user/gender.enum.dart';
 
 class User {
   int id;
@@ -8,7 +9,7 @@ class User {
   String document;
   String email;
   int phone;
-  String? gender;
+  Gender? gender;
   DateTime birth;
   Adress adress;
   CreditCard creditCard;

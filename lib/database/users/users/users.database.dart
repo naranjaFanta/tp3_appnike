@@ -1,5 +1,6 @@
 import 'package:appnike/database/users/adress/adress.database.dart';
 import 'package:appnike/database/users/credit_card/credit_card.database.dart';
+import 'package:appnike/domain/user/gender.enum.dart';
 import 'package:appnike/domain/user/user.dart';
 
 List<User> usersDB = [
@@ -10,7 +11,7 @@ List<User> usersDB = [
       document: "123456789",
       email: "john.doe@example.com",
       phone: 5551234567,
-      gender: "Male",
+      gender: Gender.male,
       birth: DateTime(1990, 4, 15),
       adress: addressesDB[0],
       creditCard: creditCardsDB[0],
@@ -23,7 +24,7 @@ List<User> usersDB = [
       document: "987654321",
       email: "jane.smith@example.com",
       phone: 5559876543,
-      gender: "Female",
+      gender: Gender.female,
       birth: DateTime(1985, 6, 10),
       adress: addressesDB[1],
       creditCard: creditCardsDB[1],
@@ -36,7 +37,7 @@ List<User> usersDB = [
       document: "123987456",
       email: "robert.johnson@example.com",
       phone: 5556547891,
-      gender: "Male",
+      gender: Gender.male,
       birth: DateTime(1975, 8, 22),
       adress: addressesDB[2],
       creditCard: creditCardsDB[2],
@@ -49,7 +50,7 @@ List<User> usersDB = [
       document: "789456123",
       email: "emily.davis@example.com",
       phone: 5553216549,
-      gender: "Female",
+      gender: Gender.female,
       birth: DateTime(1995, 12, 3),
       adress: addressesDB[3],
       creditCard: creditCardsDB[3],
@@ -62,7 +63,7 @@ List<User> usersDB = [
       document: "654321789",
       email: "michael.brown@example.com",
       phone: 5557893210,
-      gender: "Male",
+      gender: Gender.male,
       birth: DateTime(2000, 2, 14),
       adress: addressesDB[4],
       creditCard: creditCardsDB[4],
