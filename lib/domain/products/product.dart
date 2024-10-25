@@ -21,6 +21,29 @@ class Product {
     }
   );
   
+  Product.fromJson(Map<String, Object?> json)
+    : this (
+      id: json['id']! as int,
+      name: json['name']! as String,
+      description: json['description']! as String,
+      type: json['type']! as String,
+      price: json['price']! as double,
+      image: json['image']! as String,
+      isNew: json['isNew']! as bool,
+    );
+
+  Map<String, Object?> toJson() {
+    return <String, Object?> {
+      "id": id,
+      "name": name,
+      "description": description,
+      "type": type,
+      "price": price,
+      "image": image,
+      "isNew": isNew
+    };
+  }
+
   Map<String, dynamic> toFirestore() {
     return {
       "name": id,
@@ -51,4 +74,5 @@ class Product {
   }
 
   
+
 }
