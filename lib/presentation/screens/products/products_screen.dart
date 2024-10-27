@@ -1,7 +1,9 @@
+import 'package:appnike/core/app_router.dart';
 import 'package:appnike/domain/products/product.dart';
 import 'package:appnike/presentation/components/products/product_card.dart';
 import 'package:appnike/services/product_service.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductsScreen extends StatefulWidget {
   static const String name = 'products';
@@ -20,22 +22,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
       body: Center(
         child: _ProductList(),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          _productService.addProduct(
-            Product(
-              id: 5,
-              name: 'Adidas Yeezy Boost 350',
-              description: 'Zapatillas de edición limitada diseñadas por Kanye West.',
-              type: 'Streetwear',
-              price: 399.99,
-              image:
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRv45TDdXDVPDiCctILmVGIMO9cwvJWA1_Fg&s',
-              isNew: false,
-            )
-          );
+          context.push('/products/create');
         },
-        child: const Icon(Icons.add)
+        label: const Text("Agregar Producto"),
+        icon: const Icon(Icons.add)
       ),
     );
   }
