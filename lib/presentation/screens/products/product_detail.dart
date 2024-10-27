@@ -1,5 +1,8 @@
-import 'package:appnike/database/products/products.database.dart';
+import 'package:appnike/presentation/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:appnike/database/products/products.database.dart';
+
 
 class ProductDetail extends StatelessWidget {
   static const String name = 'product_detail';
@@ -21,9 +24,7 @@ class ProductDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
-              child: Image.network(
-                product.image,
-              ),
+              child: Image.network(product.image),
             ),
             const SizedBox(height: 16),
             if ((product.isNew ?? false))
@@ -39,19 +40,23 @@ class ProductDetail extends StatelessWidget {
                 ),
               ),
             Text(product.name,
-                style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Text(product.description),
             const SizedBox(height: 16),
             Text('Precio: \$${product.price}',
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const Spacer(),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<CartProvider>(context, listen: false)
+                      .addToCart(product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Producto agregado al carrito')),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),

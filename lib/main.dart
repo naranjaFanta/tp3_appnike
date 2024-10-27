@@ -1,20 +1,23 @@
 import 'package:appnike/core/app_router.dart';
 import 'package:appnike/firebase_options.dart';
+import 'package:appnike/presentation/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart' as provider; // Alias para provider
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Inicialización de Firebase
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    print('Firebase conectado exitosamente'); // Mensaje de éxito en la consola
+    print('Firebase conectado exitosamente');
   } catch (e) {
-    print('Error conectando a Firebase: $e'); // Mensaje de error en la consola
+    print('Error conectando a Firebase: $e');
   }
 
   runApp(
@@ -27,8 +30,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: appRouter,
+    return provider.MultiProvider(
+      providers: [
+        provider.ChangeNotifierProvider(create: (_) => CartProvider()), // Usar el alias 'provider'
+      ],
+      child: MaterialApp.router(
+        routerConfig: appRouter,
+      ),
     );
   }
 }
+

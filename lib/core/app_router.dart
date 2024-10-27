@@ -1,3 +1,4 @@
+import 'package:appnike/presentation/screens/cart/cart_screen.dart';
 import 'package:appnike/presentation/screens/discounts/discount_detail.dart';
 import 'package:appnike/presentation/screens/discounts/discounts_screen.dart';
 import 'package:appnike/presentation/screens/home/home_screen.dart';
@@ -56,5 +57,10 @@ final appRouter = GoRouter(
         path: '/profile/new',
         name: ProfileForm.name,
         builder: (context, state) => const ProfileForm()),
+    GoRoute(
+      path: '/cart',
+       name: CartScreen.name, // Añadir nombre de la ruta
+      builder: (context, state) => const CartScreen(),
+    ),
   ],
 );
