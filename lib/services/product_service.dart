@@ -34,4 +34,11 @@ class ProductService {
       .onError((e, _) => print("ERROR en la creacion del producto ${product.toString()}"));
 
   }
+
+  Future<int> getLastId() async {
+    AggregateQuerySnapshot query = await _productRef.count().get();
+    int lastId = query.count ?? -1;
+
+    return lastId;
+  }
 }
