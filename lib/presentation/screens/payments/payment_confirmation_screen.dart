@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+
+class PaymentConfirmationScreen extends StatelessWidget {
+  final String userEmail;
+
+  const PaymentConfirmationScreen({super.key, required this.userEmail});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Confirmación de Pago'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.check_circle,
+              color: Colors.green,
+              size: 80,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Su compra se realizó con éxito!',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Puede retirar el producto en la sucursal más cercana.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Email: $userEmail',
+              style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

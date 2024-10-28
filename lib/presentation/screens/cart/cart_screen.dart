@@ -1,6 +1,8 @@
+import 'package:appnike/presentation/screens/payments/payment_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
+
 
 class CartScreen extends StatelessWidget {
   static const String name = 'cart'; // Define el nombre aquí
@@ -63,7 +65,12 @@ class CartScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Aquí se podrá agregar funcionalidad para redirigir a la pantalla de confirmación de compra en el futuro
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PaymentScreen(userEmail: "usuario@ejemplo.com"),
+                          ),
+                        );
                       },
                       child: const Text('Pagar'),
                     ),
