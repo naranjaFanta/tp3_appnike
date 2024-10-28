@@ -10,10 +10,16 @@ class CartProvider with ChangeNotifier {
     _cartItems.add(product);
     notifyListeners();
   }
-    void removeFromCart(Product product) {
+
+  void removeFromCart(Product product) {
     _cartItems.remove(product);
     notifyListeners();
   }
 
   bool get isEmpty => _cartItems.isEmpty;
+
+  // Getter para calcular el precio total de los productos en el carrito
+  double get totalPrice {
+    return _cartItems.fold(0.0, (sum, item) => sum + item.price);
+  }
 }

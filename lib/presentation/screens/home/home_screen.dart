@@ -1,8 +1,7 @@
 import 'package:appnike/core/app_router.dart';
-import 'package:appnike/presentation/providers/cart_provider.dart';
+
 import 'package:appnike/presentation/screens/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String name = 'home';
@@ -11,19 +10,19 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(
-  title: const Text('Home Screen'),
-  actions: [
-    // Icono del carrito en el AppBar
-    IconButton(
-      icon: const Icon(Icons.shopping_cart),
-      onPressed: () {
-        // Navega a CartScreen
-        appRouter.pushNamed(CartScreen.name);
-      },
-    ),
-  ],
-),
+      appBar: AppBar(
+        title: const Text('Home Screen'),
+        actions: [
+          // Icono del carrito en el AppBar
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              // Navega a CartScreen
+              appRouter.pushNamed(CartScreen.name);
+            },
+          ),
+        ],
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
