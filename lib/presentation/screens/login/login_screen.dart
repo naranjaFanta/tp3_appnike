@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:appnike/presentation/providers/user_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String name = 'login';
@@ -22,8 +24,13 @@ class _LoginScreenState extends State<LoginScreen> {
         email: email,
         password: password,
       );
-      // Si el inicio de sesión es exitoso, redirige a la pantalla principal
-      context.go('/'); // Cambia esta línea para usar GoRouter
+
+      // Obtiene el email y establece el email en UserProvider
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.setUserEmail(userCredential.user?.email ?? email);
+
+      // Redirige a la pantalla principal después de iniciar sesión
+      context.go('/'); // Usando GoRouter
     } catch (e) {
       print("Error al iniciar sesión: $e");
       // Muestra un mensaje de error

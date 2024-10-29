@@ -2,19 +2,21 @@ import 'package:appnike/presentation/screens/payments/payment_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
-
+import 'package:appnike/presentation/providers/user_provider.dart';
 
 class CartScreen extends StatelessWidget {
-  static const String name = 'cart'; // Define el nombre aquí
+  static const String name = 'cart';
+
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Carrito de Compras'), // Título de la vista
+        title: const Text('Carrito de Compras'),
       ),
       body: Column(
         children: [
@@ -27,7 +29,7 @@ class CartScreen extends StatelessWidget {
                       final product = cartProvider.cartItems[index];
                       return ListTile(
                         title: Text(product.name),
-                        subtitle: Text('\$${product.price.toStringAsFixed(2)}'), // Mostrar el precio del producto
+                        subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () {
@@ -52,11 +54,13 @@ class CartScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Total:',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '\$${cartProvider.totalPrice.toStringAsFixed(2)}', // Mostrar el precio total
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        '\$${cartProvider.totalPrice.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -68,7 +72,10 @@ class CartScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PaymentScreen(userEmail: "usuario@ejemplo.com"),
+                            builder: (context) => PaymentScreen(
+                              userEmail: userProvider
+                                  .email, // Accede al getter 'email' correctamente
+                            ),
                           ),
                         );
                       },

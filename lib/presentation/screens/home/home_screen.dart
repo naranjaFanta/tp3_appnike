@@ -1,5 +1,4 @@
 import 'package:appnike/core/app_router.dart';
-
 import 'package:appnike/presentation/screens/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 

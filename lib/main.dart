@@ -1,6 +1,7 @@
 import 'package:appnike/core/app_router.dart';
 import 'package:appnike/firebase_options.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
+import 'package:appnike/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,7 +33,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return provider.MultiProvider(
       providers: [
-        provider.ChangeNotifierProvider(create: (_) => CartProvider()), // Usar el alias 'provider'
+        provider.ChangeNotifierProvider(create: (_) => CartProvider()),
+        provider.ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: MaterialApp.router(
         routerConfig: appRouter,

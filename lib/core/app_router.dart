@@ -3,6 +3,7 @@ import 'package:appnike/presentation/screens/discounts/discount_detail.dart';
 import 'package:appnike/presentation/screens/discounts/discounts_screen.dart';
 import 'package:appnike/presentation/screens/home/home_screen.dart';
 import 'package:appnike/presentation/screens/login/login_screen.dart';
+import 'package:appnike/presentation/screens/payments/payment_Screen.dart';
 import 'package:appnike/presentation/screens/products/product_create_screen.dart';
 import 'package:appnike/presentation/screens/products/product_detail.dart';
 import 'package:appnike/presentation/screens/products/products_screen.dart';
@@ -62,5 +63,12 @@ final appRouter = GoRouter(
        name: CartScreen.name, // Añadir nombre de la ruta
       builder: (context, state) => const CartScreen(),
     ),
+    GoRoute(
+  path: '/payment',
+  builder: (context, state) {
+    final userEmail = state.extra as String? ?? ''; // Recibe el email
+    return PaymentScreen(userEmail: userEmail);
+  },
+),
   ],
 );
