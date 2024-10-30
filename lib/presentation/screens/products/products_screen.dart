@@ -1,6 +1,7 @@
 import 'package:appnike/core/app_router.dart';
 import 'package:appnike/domain/products/product.dart';
 import 'package:appnike/presentation/components/products/product_card.dart';
+import 'package:appnike/presentation/screens/cart/cart_screen.dart';
 import 'package:appnike/services/product_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,6 +20,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Products Screen'),
+        actions: [
+          // Icono del carrito en el AppBar
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              // Navega a CartScreen
+              appRouter.pushNamed(CartScreen.name);
+            },
+          ),
+        ],
+      ),
+      
       body: Center(
         child: _ProductList(),
       ),

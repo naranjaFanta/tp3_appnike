@@ -1,6 +1,8 @@
+import 'package:appnike/core/app_router.dart';
 import 'package:appnike/database/discounts/discounts.database.dart';
 import 'package:appnike/domain/discounts/discount.dart';
 import 'package:appnike/presentation/components/discounts/discount_card.dart';
+import 'package:appnike/presentation/screens/cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 
 class DiscountsScreen extends StatelessWidget {
@@ -13,6 +15,16 @@ class DiscountsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Discounts Screen'),
+        actions: [
+          // Icono del carrito en el AppBar
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              // Navega a CartScreen
+              appRouter.pushNamed(CartScreen.name);
+            },
+          ),
+        ],
       ),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
