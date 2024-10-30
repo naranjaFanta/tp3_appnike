@@ -7,7 +7,7 @@ import 'package:appnike/presentation/providers/user_provider.dart';
 class LoginScreen extends StatefulWidget {
   static const String name = 'login';
 
-  const LoginScreen({super.key}); // Asegúrate de definir el nombre aquí
+  const LoginScreen({super.key});
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -18,6 +18,10 @@ class _LoginScreenState extends State<LoginScreen> {
   String email = '';
   String password = '';
 
+  // Credenciales de prueba
+  final String testEmail = 'edu@hotmail.com';
+  final String testPassword = 'eduardo';
+
   Future<void> signIn() async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -25,15 +29,12 @@ class _LoginScreenState extends State<LoginScreen> {
         password: password,
       );
 
-      // Obtiene el email y establece el email en UserProvider
       final userProvider = Provider.of<UserProvider>(context, listen: false);
       userProvider.setUserEmail(userCredential.user?.email ?? email);
 
-      // Redirige a la pantalla principal después de iniciar sesión
       context.go('/'); // Usando GoRouter
     } catch (e) {
       print("Error al iniciar sesión: $e");
-      // Muestra un mensaje de error
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Error al iniciar sesión')),
       );
@@ -44,27 +45,52 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Iniciar Sesión')),
-      body: Center(
-        child: Column(
-          children: [
-            TextField(
-              onChanged: (value) {
-                email = value;
-              },
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              onChanged: (value) {
-                password = value;
-              },
-              decoration: const InputDecoration(labelText: 'Contraseña'),
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: signIn,
-              child: const Text('Iniciar Sesión'),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/image/pipaniKE.jpg',
+                height: 200,
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                onChanged: (value) {
+                  email = value;
+                },
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                onChanged: (value) {
+                  password = value;
+                },
+                decoration: const InputDecoration(labelText: 'Contraseña'),
+                obscureText: true,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: signIn,
+                child: const Text('Iniciar Sesión'),
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Usuario de prueba:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text('Email: $testEmail'),
+                    Text('Contraseña: $testPassword'),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

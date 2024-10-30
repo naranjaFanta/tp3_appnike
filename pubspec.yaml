@@ -30,3 +30,5 @@ flutter:
   assets:
     - assets/image/appnike.jpg # Cambia "imagen.jpg" por el nombre real de tu archivo de imagen
     - assets/image/placeholder.png
+    - assets/image/pipaniKE.jpg
+    
