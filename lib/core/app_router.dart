@@ -12,12 +12,12 @@ import 'package:appnike/presentation/screens/user/profile_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/login',
   routes: [
     GoRoute(
         path: '/',
         name: HomeScreen.name,
-        builder: (context, state) => const LoginScreen()),
+        builder: (context, state) => const HomeScreen()),
     GoRoute(
         path: '/login',
         name: LoginScreen.name,
