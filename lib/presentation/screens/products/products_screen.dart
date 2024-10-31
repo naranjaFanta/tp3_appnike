@@ -1,5 +1,6 @@
 import 'package:appnike/core/app_router.dart';
 import 'package:appnike/domain/products/product.dart';
+import 'package:appnike/presentation/components/common/main_drawer.dart';
 import 'package:appnike/presentation/components/products/product_card.dart';
 import 'package:appnike/presentation/screens/cart/cart_screen.dart';
 import 'package:appnike/services/product_service.dart';
@@ -33,7 +34,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ],
       ),
-      
+      drawer: const MainDrawer(),
       body: Center(
         child: _ProductList(),
       ),
