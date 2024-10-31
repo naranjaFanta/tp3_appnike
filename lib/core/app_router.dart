@@ -3,7 +3,7 @@ import 'package:appnike/presentation/screens/discounts/discount_detail.dart';
 import 'package:appnike/presentation/screens/discounts/discounts_screen.dart';
 import 'package:appnike/presentation/screens/home/home_screen.dart';
 import 'package:appnike/presentation/screens/login/login_screen.dart';
-import 'package:appnike/presentation/screens/payments/payment_Screen.dart';
+import 'package:appnike/presentation/screens/payments/payment_screen.dart';
 import 'package:appnike/presentation/screens/products/product_create_screen.dart';
 import 'package:appnike/presentation/screens/products/product_detail.dart';
 import 'package:appnike/presentation/screens/products/products_screen.dart';
