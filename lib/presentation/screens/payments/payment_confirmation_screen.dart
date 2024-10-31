@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentConfirmationScreen extends StatelessWidget {
   final String userEmail;
@@ -10,6 +11,17 @@ class PaymentConfirmationScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Confirmación de Pago'),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () { 
+                context.go('/'); 
+              },
+              tooltip: "Volver al inicio",
+            );
+          },
+        ),
       ),
       body: Center(
         child: Column(
@@ -36,6 +48,11 @@ class PaymentConfirmationScreen extends StatelessWidget {
               'Email: $userEmail',
               style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
             ),
+            TextButton(
+              onPressed: () {
+                context.go('/');
+              }, 
+              child: const Text("Volver al inicio"))
           ],
         ),
       ),
