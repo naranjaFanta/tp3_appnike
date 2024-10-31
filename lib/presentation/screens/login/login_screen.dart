@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:appnike/presentation/providers/user_provider.dart';
@@ -51,9 +52,12 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/image/pipaniKE.jpg',
-                height: 200,
+              Padding(
+                padding: const EdgeInsets.all(50.0),
+                child: SvgPicture.asset(
+                  'assets/svg/logo.svg',
+                  height: 100,
+                ),
               ),
               const SizedBox(height: 20),
               TextField(
