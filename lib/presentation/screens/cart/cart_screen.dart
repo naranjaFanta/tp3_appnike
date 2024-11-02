@@ -13,6 +13,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final discountController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +34,31 @@ class CartScreen extends StatelessWidget {
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () {
-                            cartProvider.removeFromCart(product);
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Confirmación'),
+                                  content: const Text(
+                                      '¿Estás seguro de que deseas eliminar este producto?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Cancelar'),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        cartProvider.removeFromCart(product);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Eliminar'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           },
                         ),
                       );
@@ -65,6 +90,25 @@ class CartScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 16),
+                  TextField(
+                    controller: discountController,
+                    decoration: InputDecoration(
+                      labelText: 'Código de Descuento',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final discountCode = discountController.text;
+                        cartProvider.applyDiscount(discountCode);
+                      },
+                      child: const Text('Aplicar Código'),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -73,8 +117,7 @@ class CartScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => PaymentScreen(
-                              userEmail: userProvider
-                                  .email, // Accede al getter 'email' correctamente
+                              userEmail: userProvider.email,
                             ),
                           ),
                         );

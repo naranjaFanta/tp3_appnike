@@ -37,12 +37,6 @@ class MainDrawer extends StatelessWidget {
             child: Divider(),
           ),
           ListTile(
-            title: const Text('Login Screen'),
-            onTap: () {
-              context.push('/login');
-            },
-          ),
-          ListTile(
             title: const Text('Products Screen'),
             onTap: () {
               context.push('/products');
@@ -79,7 +73,7 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Cerrar sesión'),
             onTap: () {
-              // TODO Cerrar sesion
+              context.push('/login');
             },
           ),
         ],

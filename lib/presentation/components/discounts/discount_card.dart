@@ -1,58 +1,60 @@
-import 'package:appnike/domain/discounts/discount.dart';
+import 'package:appnike/domain/discounts/coupon.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class DiscountCard extends StatelessWidget {
-  final Discount discount;
+  static const String name = 'discounts';
+  final Coupon discount; 
+  final bool isUsed;
+  final VoidCallback onUse; 
 
-  const DiscountCard({super.key, required this.discount});
+  const DiscountCard({
+    Key? key,
+    required this.discount,
+    required this.isUsed,
+    required this.onUse, 
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push('/discounts/${discount.id}');
+        if (!isUsed) {
+          onUse(); 
+        }
       },
       child: Card(
         elevation: 4,
         margin: const EdgeInsets.all(5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Image.network(
-              discount.image,
-              width: double.infinity,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-            ListTile(
-              title: Text(
-                discount.business,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              subtitle: Text(discount.type),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${discount.regular}%',
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold),
+        child: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    discount.code,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  const SizedBox(width: 4),
-                  const Text('|',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                  const SizedBox(width: 4),
-                  Text(
-                    '${discount.premium}%',
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+                  subtitle: Text('Descuento del ${discount.discountPercent}%'),
+                ),
+              ],
             ),
+            if (isUsed)
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Icon(Icons.block, color: Colors.red), // Icono de no disponible
+              ),
+            if (isUsed)
+              Container(
+                color: Colors.grey.withOpacity(0.5), // Fondo gris para indicar que no está disponible
+                child: Center(
+                  child: Text(
+                    'No disponible',
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
