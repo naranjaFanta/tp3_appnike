@@ -37,7 +37,7 @@ class PaymentConfirmationScreen extends StatelessWidget {
               'Su compra se realizó con éxito!',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 40),
             const Text(
               'Puede retirar el producto en la sucursal más cercana.',
               textAlign: TextAlign.center,
@@ -48,11 +48,20 @@ class PaymentConfirmationScreen extends StatelessWidget {
               'Email: $userEmail',
               style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 context.go('/');
-              }, 
-              child: const Text("Volver al inicio"))
+              },
+              child: const Text("Volver al inicio"),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                context.go('/login');
+              },
+              child: const Text("Cerrar Sesión"),
+              style: ElevatedButton.styleFrom(primary: Colors.red),
+            ),
           ],
         ),
       ),
