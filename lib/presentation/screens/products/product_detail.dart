@@ -1,6 +1,6 @@
 import 'package:appnike/domain/products/product.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
-import 'package:appnike/services/product_service.dart';
+import 'package:appnike/core/services/product_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -3,7 +3,7 @@ import 'package:appnike/domain/products/product.dart';
 import 'package:appnike/presentation/components/common/main_drawer.dart';
 import 'package:appnike/presentation/components/products/product_card.dart';
 import 'package:appnike/presentation/screens/cart/cart_screen.dart';
-import 'package:appnike/services/product_service.dart';
+import 'package:appnike/core/services/product_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
