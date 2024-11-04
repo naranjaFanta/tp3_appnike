@@ -3,30 +3,25 @@ import 'package:appnike/domain/user/credit_card.dart';
 import 'package:appnike/domain/user/gender.enum.dart';
 
 class User {
-  int id;
-  String firstName;
-  String lastName;
-  String document;
+  String uid;
   String email;
-  int phone;
+  String? firstName;
+  String? lastName;
+  String? phone;
   Gender? gender;
-  DateTime birth;
-  Adress adress;
-  CreditCard creditCard;
-  bool? isPremium;
-  String? image;
+  Adress? adress;
+  CreditCard? creditCard;
 
   User(
-      {required this.id,
-      required this.firstName,
-      required this.lastName,
-      required this.document,
+    {
+      required this.uid,
       required this.email,
-      required this.phone,
+      this.firstName,
+      this.lastName,
+      this.phone,
       this.gender,
-      required this.birth,
-      required this.adress,
-      required this.creditCard,
-      this.isPremium,
-      this.image});
+      this.adress,
+      this.creditCard,
+    }
+  );
 }
