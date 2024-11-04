@@ -1,5 +1,5 @@
 import 'package:appnike/database/users/users/users.database.dart';
-import 'package:appnike/domain/user/user.dart';
+import 'package:appnike/domain/user/user_example.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {

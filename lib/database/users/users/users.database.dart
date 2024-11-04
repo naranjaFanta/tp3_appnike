@@ -1,7 +1,7 @@
 import 'package:appnike/database/users/adress/adress.database.dart';
 import 'package:appnike/database/users/credit_card/credit_card.database.dart';
 import 'package:appnike/domain/user/gender.enum.dart';
-import 'package:appnike/domain/user/user.dart';
+import 'package:appnike/domain/user/user_example.dart';
 
 List<User> usersDB = [
   User(
