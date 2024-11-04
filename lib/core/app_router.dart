@@ -61,7 +61,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/cart',
        name: CartScreen.name, // Añadir nombre de la ruta
-      builder: (context, state) => const CartScreen(),
+      builder: (context, state) =>  CartScreen(),
     ),
     GoRoute(
   path: '/payment',

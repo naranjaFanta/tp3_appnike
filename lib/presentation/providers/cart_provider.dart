@@ -1,12 +1,15 @@
 import 'package:appnike/domain/products/product.dart';
 import 'package:appnike/domain/discounts/coupon.dart';
+import 'package:appnike/presentation/providers/coupon_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Asegúrate de que este import esté presente
 import '../../database/discounts/coupons.database.dart';
+// Importa tu CouponProvider
 
 class CartProvider with ChangeNotifier {
   final List<Product> _cartItems = [];
   double _discountPercent = 0.0;
-  String? _lastAppliedCouponCode; // Código del cupón aplicado más reciente
+  String? _lastAppliedCouponCode;
 
   List<Product> get cartItems => _cartItems;
 
@@ -27,26 +30,27 @@ class CartProvider with ChangeNotifier {
     return _cartItems.fold(0.0, (sum, item) => sum + item.price);
   }
 
-  // Precio total con descuento
+  // Precio total con descuento aplicado
   double get totalPrice {
     return totalPriceWithoutDiscount * (1 - _discountPercent / 100);
   }
 
   // Aplicar descuento basado en el código ingresado
-  void applyDiscount(String code) {
-    // Si el código está vacío o es el mismo que el último aplicado, no hacemos nada
-    if (code.isEmpty || code == _lastAppliedCouponCode) return;
+  void applyDiscount(BuildContext context, String discountCode) {
+    final couponProvider = Provider.of<CouponProvider>(context, listen: false);
 
-    final coupon = couponDB.firstWhere(
-      (c) => c.code == code,
-      orElse: () => Coupon(code: '', discountPercent: 0),
-    );
-
-    // Aplicamos el descuento solo si el código es válido
-    if (coupon.discountPercent > 0) {
-      _discountPercent = coupon.discountPercent.toDouble();
-      _lastAppliedCouponCode = code;
-      notifyListeners();
+    // Verificar si el cupón es válido y no ha sido usado
+    final isCouponValid = couponProvider.applyCouponIfValid(discountCode);
+    
+    if (isCouponValid) {
+      // Lógica para aplicar el descuento al total en CartProvider
+      _discountPercent = couponProvider.getCouponDiscount(discountCode); // Asegúrate de guardar el descuento
+      notifyListeners(); // Notifica a los listeners de que el total ha cambiado
+    } else {
+      // Mostrar mensaje si el cupón no es válido o ya está usado
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Cupón inválido o ya utilizado")),
+      );
     }
   }
 }

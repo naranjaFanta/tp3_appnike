@@ -60,7 +60,7 @@ class PaymentConfirmationScreen extends StatelessWidget {
                 context.go('/login');
               },
               child: const Text("Cerrar Sesión"),
-              style: ElevatedButton.styleFrom(primary: Colors.red),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             ),
           ],
         ),

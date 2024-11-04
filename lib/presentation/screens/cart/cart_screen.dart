@@ -2,17 +2,15 @@ import 'package:appnike/presentation/screens/payments/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
-import 'package:appnike/presentation/providers/user_provider.dart';
+import 'package:appnike/presentation/providers/user_provider.dart'; // Suponiendo que tienes un UserProvider
 
 class CartScreen extends StatelessWidget {
   static const String name = 'cart';
 
-  const CartScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context); // Obtener el UserProvider
     final discountController = TextEditingController();
 
     return Scaffold(
@@ -39,13 +37,10 @@ class CartScreen extends StatelessWidget {
                               builder: (context) {
                                 return AlertDialog(
                                   title: const Text('Confirmación'),
-                                  content: const Text(
-                                      '¿Estás seguro de que deseas eliminar este producto?'),
+                                  content: const Text('¿Estás seguro de que deseas eliminar este producto?'),
                                   actions: [
                                     TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
+                                      onPressed: () => Navigator.of(context).pop(),
                                       child: const Text('Cancelar'),
                                     ),
                                     ElevatedButton(
@@ -79,13 +74,11 @@ class CartScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Total:',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         '\$${cartProvider.totalPrice.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -103,7 +96,7 @@ class CartScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         final discountCode = discountController.text;
-                        cartProvider.applyDiscount(discountCode);
+                       cartProvider.applyDiscount(context, discountCode);
                       },
                       child: const Text('Aplicar Código'),
                     ),
@@ -117,7 +110,7 @@ class CartScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => PaymentScreen(
-                              userEmail: userProvider.email,
+                              userEmail: userProvider.email, // Pasa el email del usuario
                             ),
                           ),
                         );
