@@ -35,7 +35,6 @@ class MainApp extends StatelessWidget {
     return provider.MultiProvider(
       providers: [
         provider.ChangeNotifierProvider(create: (_) => CartProvider()),
-        provider.ChangeNotifierProvider(create: (_) => UserProvider()),
         provider.ChangeNotifierProvider(create: (_) => CouponProvider()),
       ],
       child: MaterialApp.router(

@@ -1,12 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:appnike/domain/user/user.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserProvider with ChangeNotifier {
-  String _email = '';
+final NotifierProvider<UserNotifier, User> userProvider = NotifierProvider<UserNotifier, User>(UserNotifier.new);
 
-  String get email => _email;
+class UserNotifier extends Notifier<User> {
+  @override
+  build() {
+    return User(email: "nomail", uid: 'nouser');
+  }
 
-  void setUserEmail(String email) {
-    _email = email;
-    notifyListeners();
+  Future login(firebase_auth.User user) async {
+    state = User(email: user.email!, uid: user.uid, firstName: user.displayName, phone: user.phoneNumber);
+  }
+
+  void logout() {
+    state = User(email: "nomail", uid: 'nouser');
   }
 }

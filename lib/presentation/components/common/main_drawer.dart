@@ -1,12 +1,14 @@
+import 'package:appnike/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
-class MainDrawer extends StatelessWidget {
+class MainDrawer extends ConsumerWidget {
   const MainDrawer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -28,9 +30,9 @@ class MainDrawer extends StatelessWidget {
                 )
             ),
           ),
-          const ListTile(
-            title: Text('Usuario'),
-            subtitle: Text('mail@gmail.com'), //TODO Usar mail del usuario (un provider)
+          ListTile(
+            title: const Text('Usuario'),
+            subtitle: Text(ref.watch(userProvider).email),
           ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
@@ -73,7 +75,8 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Cerrar sesión'),
             onTap: () {
-              context.push('/login');
+              ref.read(userProvider.notifier).logout();
+              context.go('/login');
             },
           ),
         ],

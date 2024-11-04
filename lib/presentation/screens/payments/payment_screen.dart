@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:appnike/presentation/screens/payments/payment_confirmation_screen.dart';
+import 'package:appnike/presentation/screens/products/products_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentScreen extends StatefulWidget {
-  final String userEmail;
-
-  const PaymentScreen({super.key, required this.userEmail});
+  static const String name = 'payment_process';
+  const PaymentScreen({super.key});
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -16,16 +17,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void initState() {
     super.initState();
     // Temporizador de 12 segundos para simular el procesamiento del pago
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PaymentConfirmationScreen(
-            userEmail: widget.userEmail,
-          ),
-        ),
-      );
-    });
+    Timer(const Duration(seconds: 5), () => context.go('/payment_confirmation'));
   }
 
   @override

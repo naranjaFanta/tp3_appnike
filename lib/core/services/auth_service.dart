@@ -1,41 +1,44 @@
+import 'package:appnike/presentation/providers/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Método de autenticación que devuelve el email del usuario
-  Future<String?> signIn(String email, String password) async {
+  login(String email, String password, BuildContext context, WidgetRef ref) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return userCredential.user?.email; // Devuelve el email del usuario
+      ref.read(userProvider.notifier).login(userCredential.user!);
+      context.go('/');
     } catch (e) {
-      print('Error al iniciar sesión: $e');
-      return null;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error al iniciar sesión')),
+      );
     }
   }
 
-  // Método de registro que devuelve el email del usuario
-  Future<String?> register(String email, String password) async {
+  register(String email, String password, BuildContext context) async {
     try {
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return userCredential.user?.email; // Devuelve el email del usuario
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Su usuario (${userCredential.user?.email}) fue creado exitosamente')),
+      );
     } catch (e) {
       print('Error al registrar usuario: $e');
       return null;
     }
   }
 
-  // Método para cerrar sesión
-  Future<void> signOut() async {
+  logout(BuildContext context, WidgetRef ref) async {
     await _auth.signOut();
+    ref.read(userProvider.notifier).logout();
   }
-
-  // Getter para obtener el email del usuario actual
-  String? get currentUserEmail => _auth.currentUser?.email;
 }

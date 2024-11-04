@@ -1,21 +1,14 @@
+import 'package:appnike/core/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:appnike/presentation/providers/user_provider.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerWidget {
   static const String name = 'login';
 
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final AuthService _authService = AuthService();
   String email = '';
   String password = '';
 
@@ -23,27 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final String testEmail = 'edu@hotmail.com';
   final String testPassword = 'eduardo';
 
-  Future<void> signIn() async {
-    try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
-      userProvider.setUserEmail(userCredential.user?.email ?? email);
-
-      context.go('/'); // Usando GoRouter
-    } catch (e) {
-      print("Error al iniciar sesión: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Error al iniciar sesión')),
-      );
-    }
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(title: const Text('Iniciar Sesión')),
       body: SingleChildScrollView(
@@ -76,7 +50,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: signIn,
+                onPressed: () {
+                  _authService.login(email, password, context, ref);
+                },
                 child: const Text('Iniciar Sesión'),
               ),
               const SizedBox(height: 20),

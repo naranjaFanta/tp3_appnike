@@ -1,13 +1,15 @@
+import 'package:appnike/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class PaymentConfirmationScreen extends StatelessWidget {
-  final String userEmail;
+class PaymentConfirmationScreen extends ConsumerWidget {
+  static const String name = 'payment_confirmation';
 
-  const PaymentConfirmationScreen({super.key, required this.userEmail});
+  const PaymentConfirmationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Confirmación de Pago'),
@@ -45,7 +47,7 @@ class PaymentConfirmationScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Email: $userEmail',
+              'Email: ${ref.read(userProvider).email}',
               style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
             ),
             ElevatedButton(
@@ -59,8 +61,8 @@ class PaymentConfirmationScreen extends StatelessWidget {
               onPressed: () {
                 context.go('/login');
               },
-              child: const Text("Cerrar Sesión"),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: const Text("Cerrar Sesión"),
             ),
           ],
         ),

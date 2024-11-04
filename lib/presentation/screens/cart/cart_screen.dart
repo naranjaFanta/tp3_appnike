@@ -1,16 +1,17 @@
-import 'package:appnike/presentation/screens/payments/payment_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart' as flutter_provider;
 import 'package:appnike/presentation/providers/cart_provider.dart';
-import 'package:appnike/presentation/providers/user_provider.dart'; // Suponiendo que tienes un UserProvider
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends ConsumerWidget {
   static const String name = 'cart';
 
+  const CartScreen({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    final cartProvider = Provider.of<CartProvider>(context);
-    final userProvider = Provider.of<UserProvider>(context); // Obtener el UserProvider
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartProvider = flutter_provider.Provider.of<CartProvider>(context);
     final discountController = TextEditingController();
 
     return Scaffold(
@@ -85,7 +86,7 @@ class CartScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   TextField(
                     controller: discountController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Código de Descuento',
                       border: OutlineInputBorder(),
                     ),
@@ -106,14 +107,7 @@ class CartScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PaymentScreen(
-                              userEmail: userProvider.email, // Pasa el email del usuario
-                            ),
-                          ),
-                        );
+                        context.go('/payment');
                       },
                       child: const Text('Pagar'),
                     ),
