@@ -1,3 +1,4 @@
+import 'package:appnike/core/services/auth_service.dart';
 import 'package:appnike/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,8 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 class MainDrawer extends ConsumerWidget {
-  const MainDrawer({super.key});
+  MainDrawer({super.key});
 
+  final AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
@@ -75,8 +77,7 @@ class MainDrawer extends ConsumerWidget {
           ListTile(
             title: const Text('Cerrar sesión'),
             onTap: () {
-              ref.read(userProvider.notifier).logout();
-              context.go('/login');
+              _authService.logout(context, ref);
             },
           ),
         ],

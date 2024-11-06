@@ -40,5 +40,6 @@ class AuthService {
   logout(BuildContext context, WidgetRef ref) async {
     await _auth.signOut();
     ref.read(userProvider.notifier).logout();
+    context.go('/login');
   }
 }

@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

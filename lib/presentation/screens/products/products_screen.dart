@@ -34,7 +34,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           ),
         ],
       ),
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(),
       body: Center(
         child: _ProductList(),
       ),
