@@ -51,7 +51,7 @@ class MainDrawer extends ConsumerWidget {
             onTap: () {
               context.push('/discounts');
             },
-          ),
+          ),/**
           ListTile(
             title: const Text('Profile Screen'),
             onTap: () {
@@ -63,7 +63,7 @@ class MainDrawer extends ConsumerWidget {
             onTap: () {
               context.push('/profile/new');
             },
-          ),
+          ), */
           ListTile(
             title: const Text('Carrito de Compras'),
             onTap: () {
