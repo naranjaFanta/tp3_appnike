@@ -23,6 +23,15 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // elimina los productos y el cupon agregado
+  void emptyCart() {
+    _cartItems.clear();
+    _discountPercent = 0.0;
+    notifyListeners();
+  }
+
+
+
   bool get isEmpty => _cartItems.isEmpty;
 
   // Precio total sin descuento
@@ -33,6 +42,10 @@ class CartProvider with ChangeNotifier {
   // Precio total con descuento aplicado
   double get totalPrice {
     return totalPriceWithoutDiscount * (1 - _discountPercent / 100);
+  }
+
+  double get discountedAmount {
+    return totalPriceWithoutDiscount - (totalPriceWithoutDiscount * (1 - _discountPercent / 100));
   }
 
   // Aplicar descuento basado en el código ingresado
