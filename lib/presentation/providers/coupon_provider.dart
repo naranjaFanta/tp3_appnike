@@ -3,16 +3,15 @@ import 'package:appnike/domain/discounts/coupon.dart';
 import 'package:flutter/material.dart';
 
 class CouponProvider with ChangeNotifier {
-  List<Coupon> _coupons = List.from(couponDB); // Crea una copia de los cupones iniciales
+  final List<Coupon> _coupons = List.from(couponDB); // Copia de los cupones iniciales
 
   List<Coupon> get coupons => _coupons;
 
   void useCoupon(String code) {
-    // Encuentra el cupón por código y márcalo como usado
     final couponIndex = _coupons.indexWhere((c) => c.code == code);
     if (couponIndex != -1 && !_coupons[couponIndex].isUsed) {
       _coupons[couponIndex].isUsed = true;
-      notifyListeners(); // Notifica a los listeners para actualizar la UI
+      notifyListeners();
     }
   }
 
@@ -21,17 +20,17 @@ class CouponProvider with ChangeNotifier {
     
     if (couponIndex != -1 && !_coupons[couponIndex].isUsed) {
       _coupons[couponIndex].isUsed = true;
-      notifyListeners(); // Notificar cambios en el estado de los cupones
-      return true; // El cupón es válido y fue aplicado exitosamente
+      notifyListeners(); // Notifica cambios en el estado de los cupones
+      return true;
     }
-    return false; // El cupón es inválido o ya ha sido usado
+    return false;
   }
 
   double getCouponDiscount(String code) {
     final coupon = _coupons.firstWhere(
       (c) => c.code == code,
-      orElse: () => Coupon(code: 'invalid', discountPercent: 0), // Devuelve un cupón no válido
+      orElse: () => Coupon(code: 'invalid', discountPercent: 0),
     );
-    return coupon.discountPercent.toDouble(); // Convertir a double antes de devolver
+    return coupon.discountPercent.toDouble();
   }
 }

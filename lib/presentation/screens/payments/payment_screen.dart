@@ -43,7 +43,7 @@ class PaymentScreen extends StatefulWidget {
     void processPayment() {
       final purchaseProvider = ref.read(purchaseProvider.notifier);
       final cartProvider = ref.read(cartProvider);
-      List<String> items = cartProvider.items.map((item) => item.name).toList(); //["Nike Air Force 1", "Adidas Ultraboost"];
+      List<String> items = cartProvider.items.map((item) => item.name).toList(); //["Nike Air Force 1", "Adidas Ultraboost"] si necesitamos ejemplo
       double totalAmount = cartProvider.totalAmount;
 
       final newPurchase = Purchase(
