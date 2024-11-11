@@ -23,7 +23,7 @@ class PurchaseHistoryScreen extends ConsumerWidget {
                 return ListTile(
                   title: Text('Compra del ${purchase.date.toLocal()}'),
                   subtitle: Text(
-                      'Items: ${purchase.items.join(", ")} \n Total: \$${purchase.totalAmount}'),
+                      'Articulos: ${purchase.items.join(", ")} \n Total: \$${purchase.totalAmount}'),
                 );
               },
             ),

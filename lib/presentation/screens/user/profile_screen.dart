@@ -1,5 +1,4 @@
 import 'package:appnike/database/users/users/users.database.dart';
-import 'package:appnike/domain/user/user_example.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -111,7 +110,7 @@ class ProfileScreen extends StatelessWidget {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 4),
-                      Text("${user.creditCard.name}"),
+                      Text(user.creditCard.name),
                       Text(
                           "Vence: ${user.creditCard.expiryDate.month}/${user.creditCard.expiryDate.year}"),
                     ],

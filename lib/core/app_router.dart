@@ -26,7 +26,7 @@ final appRouter = GoRouter(
     GoRoute(
         path: '/products',
         name: ProductsScreen.name,
-        builder: (context, state) => ProductsScreen()),
+        builder: (context, state) => const ProductsScreen()),
     GoRoute(
         path: '/products/create',
         name: ProductCreateScreen.name,

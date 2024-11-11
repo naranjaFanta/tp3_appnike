@@ -8,7 +8,7 @@ class ProfileForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     // Controladores para los campos del formulario
     TextEditingController firstNameController = TextEditingController();
@@ -28,7 +28,7 @@ class ProfileForm extends StatelessWidget {
     DateTime? birthDate;
     Gender? gender;
 
-    Future<void> _selectBirthDate(BuildContext context) async {
+    Future<void> selectBirthDate(BuildContext context) async {
       final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime(2000), // Fecha inicial
@@ -48,7 +48,7 @@ class ProfileForm extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _formKey,
+          key: formKey,
           child: ListView(
             children: [
               // Campo de Nombre
@@ -106,11 +106,11 @@ class ProfileForm extends StatelessWidget {
                   labelText: 'Fecha de Nacimiento',
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.calendar_today),
-                    onPressed: () => _selectBirthDate(context),
+                    onPressed: () => selectBirthDate(context),
                   ),
                 ),
                 readOnly: true,
-                onTap: () => _selectBirthDate(context),
+                onTap: () => selectBirthDate(context),
               ),
               // Campo de Dirección: Calle
               TextFormField(
@@ -160,7 +160,7 @@ class ProfileForm extends StatelessWidget {
               // Botón de Enviar
               ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
+                  if (formKey.currentState!.validate()) {
                     // Procesar los datos del formulario
                   }
                 },

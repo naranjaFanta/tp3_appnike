@@ -7,11 +7,11 @@ class DiscountCard extends StatelessWidget {
   final VoidCallback onUse;
 
   const DiscountCard({
-    Key? key,
+    super.key,
     required this.discount,
     required this.isUsed,
     required this.onUse,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class DiscountCard extends StatelessWidget {
               ],
             ),
             if (isUsed)
-              Positioned(
+              const Positioned(
                 right: 8,
                 top: 8,
                 child: Icon(Icons.block, color: Colors.red),

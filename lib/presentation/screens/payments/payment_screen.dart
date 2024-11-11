@@ -7,7 +7,7 @@ import 'package:appnike/presentation/providers/purchase_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:appnike/presentation/screens/payments/payment_confirmation_screen.dart';
 import 'package:appnike/database/purchases/purchases.database.dart';
-import 'package:uuid/uuid.dart'; // nos deja crear un id unico
+import 'package:uuid/uuid.dart';
 
 
 class PaymentScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class PaymentScreen extends StatefulWidget {
       setState(() {
         double discount = (coupon.discountPercent / 100) * originalTotalAmount;
         discountedTotalAmount = originalTotalAmount - discount.toInt();
-        coupon.isUsed = true; // Marca como usado o no
+        coupon.isUsed = true;
         message = "Cupon de ${coupon.discountPercent}% aplicado.";
       });
     } else {

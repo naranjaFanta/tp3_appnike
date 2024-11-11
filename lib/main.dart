@@ -3,7 +3,6 @@ import 'package:appnike/firebase_options.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
 import 'package:appnike/presentation/providers/coupon_provider.dart';
 import 'package:appnike/presentation/providers/theme_provider.dart';
-import 'package:appnike/presentation/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
