@@ -72,7 +72,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/payment_confirmation',
       name: PaymentConfirmationScreen.name,
-      builder: (context, state) => const PaymentConfirmationScreen(),
+      builder: (context, state) => const PaymentConfirmationScreen(userEmail: '',),
     )
   ],
 );

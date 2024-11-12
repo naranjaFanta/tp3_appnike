@@ -28,7 +28,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/image/appnike.jpg # Cambia "imagen.jpg" por el nombre real de tu archivo de imagen
+    - assets/image/appnike.jpg
     - assets/image/placeholder.png
     - assets/image/pipaniKE.jpg
     - assets/svg/logo.svg
