@@ -2,7 +2,6 @@ import 'package:appnike/presentation/components/products/product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart' as flutter_provider;
 import 'package:appnike/presentation/providers/cart_provider.dart';
 
 class CartScreen extends ConsumerWidget {
@@ -12,7 +11,8 @@ class CartScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cartProvider = flutter_provider.Provider.of<CartProvider>(context);
+    final _cartProvider = ref.watch(cartProvider.notifier);
+    final _cartProducts = ref.watch(cartProvider);
     final discountController = TextEditingController();
 
     return Scaffold(
@@ -22,18 +22,18 @@ class CartScreen extends ConsumerWidget {
       body: Column(
         children: [
           Expanded(
-            child: cartProvider.isEmpty
+            child: _cartProvider.isEmpty
                 ? const Center(child: Text('El carrito está vacío'))
                 : ListView.builder(
-                    itemCount: cartProvider.cartItems.length,
+                    itemCount: _cartProducts.length,
                     itemBuilder: (context, index) {
-                      final product = cartProvider.cartItems[index];
+                      final product = _cartProducts[index];
                       return ProductTile(product: product);
                     },
                   ),
           ),
           
-          if (!cartProvider.isEmpty)
+          if (!_cartProvider.isEmpty)
             Container(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -48,7 +48,7 @@ class CartScreen extends ConsumerWidget {
                         child: TextButton(
                           onPressed: () {
                             final discountCode = discountController.text;
-                            cartProvider.applyDiscount(context, discountCode);
+                            _cartProvider.applyDiscount(context, ref, discountCode);
                           }, 
                           child: const Text("Aplicar")
                         ),
@@ -58,13 +58,13 @@ class CartScreen extends ConsumerWidget {
                   const SizedBox(height: 8),
                   AmoutTile(
                     title: "Subtotal", 
-                    amount: cartProvider.totalPriceWithoutDiscount,
+                    amount: _cartProvider.totalPriceWithoutDiscount,
                     titleStyle: const TextStyle(fontSize: 18, color: Colors.black54),
                     amountStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)  
                   ),
                   AmoutTile(
                     title: "Descuento", 
-                    amount: cartProvider.discountedAmount, 
+                    amount: _cartProvider.discountedAmount, 
                     titleStyle: const TextStyle(fontSize: 18, color: Colors.black54),
                     amountStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                     isNegative: true
@@ -72,7 +72,7 @@ class CartScreen extends ConsumerWidget {
                   const Divider(),
                   AmoutTile(
                     title: "Total:", 
-                    amount: cartProvider.totalPrice,
+                    amount: _cartProvider.totalPrice,
                     titleStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     amountStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),

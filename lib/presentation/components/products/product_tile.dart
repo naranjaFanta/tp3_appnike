@@ -1,17 +1,16 @@
 import 'package:appnike/domain/products/product.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart' as flutter_provider;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class ProductTile extends StatelessWidget {
+class ProductTile extends ConsumerWidget {
   final Product product;
   
   const ProductTile({super.key, required this.product});
 
   @override
-  Widget build(BuildContext context) {
-    final cartProvider = flutter_provider.Provider.of<CartProvider>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
 
     return ListTile(
       leading: Image.network(product.image),
@@ -33,7 +32,7 @@ class ProductTile extends StatelessWidget {
                   ),
                   FilledButton(
                     onPressed: () {
-                      cartProvider.removeFromCart(product);
+                      ref.read(cartProvider.notifier).removeFromCart(product);
                       Navigator.of(context).pop();
                     },
                     child: const Text('Eliminar'),

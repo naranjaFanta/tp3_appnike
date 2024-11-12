@@ -1,4 +1,3 @@
-import 'package:appnike/domain/purchases/purchase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:appnike/presentation/providers/purchase_provider.dart';
@@ -6,7 +5,7 @@ import 'package:appnike/presentation/providers/purchase_provider.dart';
 class PurchaseHistoryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final purchases = ref.watch(purchaseProvider).purchases;
+    final purchases = ref.read(purchaseProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -23,7 +22,7 @@ class PurchaseHistoryScreen extends ConsumerWidget {
                 return ListTile(
                   title: Text('Compra del ${purchase.date.toLocal()}'),
                   subtitle: Text(
-                      'Articulos: ${purchase.items.join(", ")} \n Total: \$${purchase.totalAmount}'),
+                      'Items: ${purchase.items.join(", ")} \n Total: \$${purchase.totalAmount}'),
                 );
               },
             ),

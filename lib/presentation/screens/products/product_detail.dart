@@ -2,10 +2,10 @@ import 'package:appnike/domain/products/product.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
 import 'package:appnike/core/services/product_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class ProductDetail extends StatelessWidget {
+class ProductDetail extends ConsumerWidget {
   static const String name = 'product_detail';
   final int productId;
   ProductDetail({super.key, required this.productId});
@@ -13,7 +13,7 @@ class ProductDetail extends StatelessWidget {
   final ProductService _productService = ProductService();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return FutureBuilder(
       future: _productService.getProduct(productId), 
       builder: (context, AsyncSnapshot<Product?> snapshot) {
@@ -60,8 +60,7 @@ class ProductDetail extends StatelessWidget {
                           width: MediaQuery.sizeOf(context).width,
                           child: ElevatedButton(
                             onPressed: () {
-                              Provider.of<CartProvider>(context, listen: false)
-                                  .addToCart(snapshot.data!);
+                              ref.read(cartProvider.notifier).addToCart(snapshot.data!);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(content: Text('Producto agregado al carrito')),
                               );
