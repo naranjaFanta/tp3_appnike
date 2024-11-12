@@ -6,12 +6,14 @@ import 'package:appnike/presentation/components/discounts/discount_card.dart';
 class DiscountsScreen extends StatelessWidget {
   static const String name = 'discounts';
 
+  const DiscountsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final couponProvider = Provider.of<CouponProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text("Descuentos")),
+      appBar: AppBar(title: const Text("Descuentos")),
       body: ListView.builder(
         itemCount: couponProvider.coupons.length,
         itemBuilder: (context, index) {
@@ -33,3 +35,4 @@ class DiscountsScreen extends StatelessWidget {
     );
   }
 }
+//

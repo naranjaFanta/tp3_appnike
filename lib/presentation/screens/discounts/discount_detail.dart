@@ -40,4 +40,4 @@ class DiscountDetail extends StatelessWidget {
       ),
     );
   }
-}
+}//
