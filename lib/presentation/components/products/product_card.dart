@@ -19,24 +19,32 @@ class ProductCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Image.network(
-              product.image,
-              width: double.infinity,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-            if ((product.isNew ?? false))
-              const Padding(
-                padding: EdgeInsets.all(6),
-                child: Text(
-                  'Nuevo',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 215, 195, 104),
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
+            Stack(
+              children:[
+                Image.network(
+                  product.image,
+                  width: double.infinity,
+                  height: 120,
+                  fit: BoxFit.cover,
                 ),
-              ),
+                if ((product.isNew ?? false))
+                  const Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Nuevo',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 215, 195, 104),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ] 
+                ),
+            
             ListTile(
               title: Text(
                 product.name,
