@@ -7,15 +7,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-final AsyncNotifierProvider<PurchaseNotifier, List<Purchase>> purchaseProvider = AsyncNotifierProvider<PurchaseNotifier, List<Purchase>>(PurchaseNotifier.new);
+final AsyncNotifierProvider<PurchaseNotifier, List<Purchase>> purchaseProvider =
+    AsyncNotifierProvider<PurchaseNotifier, List<Purchase>>(PurchaseNotifier.new);
 
 class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
   final db = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
-  
+
   late final CollectionReference _purchaseRef = db.collection('compras').withConverter<Purchase>(
-    fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!), 
-    toFirestore: (purchase, _) => purchase.toJson()
+    fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!),
+    toFirestore: (purchase, _) => purchase.toJson(),
   );
 
   @override
@@ -23,36 +24,37 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
     return getCurrentUserPurchases();
   }
 
-  Future<List<Purchase>> getAllPurchases () async {
+  Future<List<Purchase>> getAllPurchases() async {
     var data = await db.collection('compras').withConverter<Purchase>(
-      fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!), 
-      toFirestore: (purchase, _) => purchase.toJson()
+      fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!),
+      toFirestore: (purchase, _) => purchase.toJson(),
     ).get();
     final allData = data.docs.map((doc) => doc.data()).toList();
 
     return allData;
   }
 
-  Future<List<Purchase>> getCurrentUserPurchases () async {
+  Future<List<Purchase>> getCurrentUserPurchases() async {
     final User? user = auth.currentUser;
 
-    var data = await db.collection('compras')
-    .where("userEmail", isEqualTo: user?.email)
-    .withConverter<Purchase>(
-      fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!), 
-      toFirestore: (purchase, _) => purchase.toJson()
-    ).get();
+    var data = await db
+        .collection('compras')
+        .where("userEmail", isEqualTo: user?.email)
+        .withConverter<Purchase>(
+          fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!),
+          toFirestore: (purchase, _) => purchase.toJson(),
+        )
+        .get();
 
     return data.docs.map((doc) => doc.data()).toList();
   }
 
-  reload() async {
-    state.value!.clear();
-    List<Purchase> list = await getCurrentUserPurchases();
-    state.value?.addAll(list);
+  Future<void> reload() async {
+    state = const AsyncLoading(); // Cambiar a estado de carga
+    state = AsyncData(await getCurrentUserPurchases());
   }
 
-  addPurchase(List<String> items, double totalAmount, WidgetRef ref) {
+  Future<void> addPurchase(List<String> items, double totalAmount, WidgetRef ref) async {
     final newPurchase = Purchase(
       id: const Uuid().v4(),
       userEmail: ref.read(userProvider).email,
@@ -60,11 +62,32 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
       items: items,
       totalAmount: totalAmount,
     );
-    state.value!.add(newPurchase);
-    _purchaseRef
-      .doc()
-      .set(newPurchase)
-      .onError((e, _) => print("ERROR en el proceso de compra: ${newPurchase.toString()}"));
+
+    try {
+      await _purchaseRef.doc(newPurchase.id).set(newPurchase);
+      reload(); // Recargar el estado
+    } catch (e) {
+      print("ERROR en el proceso de compra: ${newPurchase.toString()}");
+    }
   }
 
+  Future<void> clearHistory() async {
+    final User? user = auth.currentUser;
+
+    if (user != null) {
+      try {
+        // Eliminar todas las compras del usuario actual
+        var batch = db.batch();
+        final purchasesSnapshot = await _purchaseRef.where("userEmail", isEqualTo: user.email).get();
+        for (var doc in purchasesSnapshot.docs) {
+          batch.delete(doc.reference);
+        }
+        await batch.commit();
+
+        reload(); // Recargar el estado después de la eliminación
+      } catch (e) {
+        print("ERROR al eliminar el historial de compras: $e");
+      }
+    }
+  }
 }
