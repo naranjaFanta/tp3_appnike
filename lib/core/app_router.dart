@@ -66,8 +66,9 @@ final appRouter = GoRouter(
       builder: (context, state) => const CartScreen(),
     ),
     GoRoute(
-      path: '/purchase-history',
-      builder: (context, state) => PurchaseHistoryScreen(),
+      path: '/purchase_history',
+      name: PurchaseHistoryScreen.name,
+      builder: (context, state) => const PurchaseHistoryScreen(),
     ),
     GoRoute(
       path: '/payment',
@@ -77,7 +78,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/payment_confirmation',
       name: PaymentConfirmationScreen.name,
-      builder: (context, state) => const PaymentConfirmationScreen(userEmail: '',),
+      builder: (context, state) => const PaymentConfirmationScreen(),
     )
   ],
 );

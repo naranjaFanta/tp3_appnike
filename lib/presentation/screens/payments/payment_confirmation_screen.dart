@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 class PaymentConfirmationScreen extends ConsumerWidget {
   static const String name = 'payment_confirmation';
 
-  const PaymentConfirmationScreen({super.key, required String userEmail});
+  const PaymentConfirmationScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -3,6 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:appnike/presentation/providers/purchase_provider.dart';
 
 class PurchaseHistoryScreen extends ConsumerWidget {
+  static const String name = 'purchase_history';
+  const PurchaseHistoryScreen({super.key});
+  
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final purchases = ref.watch(purchaseProvider);
