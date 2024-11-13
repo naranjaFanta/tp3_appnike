@@ -33,7 +33,7 @@ class PaymentScreen extends ConsumerWidget {
       );
 
       purchaseDB.add(newPurchase);
-      //TODO agregar a firestore
+    
       _purchaseProvider.addPurchase(items, totalAmount, ref);
 
       _cartProvider.emptyCart();

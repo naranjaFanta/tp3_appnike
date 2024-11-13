@@ -16,14 +16,14 @@ class PurchaseHistoryScreen extends ConsumerWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Cerrar el diálogo
+                Navigator.of(context).pop();
               },
               child: const Text('Cancelar'),
             ),
             TextButton(
               onPressed: () {
-                ref.read(purchaseProvider.notifier).clearHistory(); // Llamada para limpiar el historial
-                Navigator.of(context).pop(); // Cerrar el diálogo
+                ref.read(purchaseProvider.notifier).clearHistory(); 
+                Navigator.of(context).pop();
               },
               child: const Text('Eliminar', style: TextStyle(color: Colors.red)),
             ),

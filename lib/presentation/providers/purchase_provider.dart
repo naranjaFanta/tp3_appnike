@@ -50,7 +50,7 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
   }
 
   Future<void> reload() async {
-    state = const AsyncLoading(); // Cambiar a estado de carga
+    state = const AsyncLoading();
     state = AsyncData(await getCurrentUserPurchases());
   }
 
@@ -65,7 +65,7 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
 
     try {
       await _purchaseRef.doc(newPurchase.id).set(newPurchase);
-      reload(); // Recargar el estado
+      reload();
     } catch (e) {
       print("ERROR en el proceso de compra: ${newPurchase.toString()}");
     }
@@ -76,7 +76,6 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
 
     if (user != null) {
       try {
-        // Eliminar todas las compras del usuario actual
         var batch = db.batch();
         final purchasesSnapshot = await _purchaseRef.where("userEmail", isEqualTo: user.email).get();
         for (var doc in purchasesSnapshot.docs) {
@@ -84,7 +83,7 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
         }
         await batch.commit();
 
-        reload(); // Recargar el estado después de la eliminación
+        reload(); 
       } catch (e) {
         print("ERROR al eliminar el historial de compras: $e");
       }
