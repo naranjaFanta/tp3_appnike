@@ -5,7 +5,7 @@ import 'package:appnike/presentation/providers/purchase_provider.dart';
 class PurchaseHistoryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final purchases = ref.read(purchaseProvider);
+    final purchases = ref.watch(purchaseProvider);
 
     return Scaffold(
       appBar: AppBar(

@@ -10,6 +10,7 @@ import 'package:appnike/presentation/screens/products/product_detail.dart';
 import 'package:appnike/presentation/screens/products/products_screen.dart';
 import 'package:appnike/presentation/screens/user/profile_form.dart';
 import 'package:appnike/presentation/screens/user/profile_screen.dart';
+import 'package:appnike/presentation/screens/user/purchase_history_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -63,6 +64,10 @@ final appRouter = GoRouter(
       path: '/cart',
       name: CartScreen.name, // Añadir nombre de la ruta
       builder: (context, state) => const CartScreen(),
+    ),
+    GoRoute(
+      path: '/purchase-history',
+      builder: (context, state) => PurchaseHistoryScreen(),
     ),
     GoRoute(
       path: '/payment',

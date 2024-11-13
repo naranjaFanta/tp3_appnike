@@ -1,5 +1,6 @@
 import 'package:appnike/database/users/users/users.database.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const String name = 'profile_screen';
@@ -124,6 +125,15 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  context.go('/purchase-history');
+                },
+                child: const Text("Ver Historial de Compras"),
+              ),
+            ),
           ],
         ),
       ),
