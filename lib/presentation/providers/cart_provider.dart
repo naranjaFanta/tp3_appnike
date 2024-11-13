@@ -18,7 +18,6 @@ class CartNotifier extends Notifier<List<Product>> {
   }
 
   void removeFromCart(Product product) {
-    //state.remove(product);
     state = state.where((item) => item != product).toList();
   }
 
@@ -38,7 +37,7 @@ class CartNotifier extends Notifier<List<Product>> {
   }
 
   double get discountedAmount {
-    return totalPriceWithoutDiscount - (totalPriceWithoutDiscount * (1 - _discountPercent / 100));
+    return totalPriceWithoutDiscount * (_discountPercent / 100);
   }
 
   List<String> getProductsNames () {
@@ -50,6 +49,7 @@ class CartNotifier extends Notifier<List<Product>> {
     
     if (isCouponValid) {
       _discountPercent = ref.read(couponProvider.notifier).getCouponDiscount(discountCode);
+      state = [...state];
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Cupón inválido o ya utilizado")),
@@ -57,58 +57,3 @@ class CartNotifier extends Notifier<List<Product>> {
     }
   }
 }
-
-/*
-class CartProvider with ChangeNotifier {
-  final List<Product> _cartItems = [];
-  double _discountPercent = 0.0;
-  String? _lastAppliedCouponCode;
-
-  List<Product> get cartItems => _cartItems;
-
-  void addToCart(Product product) {
-    _cartItems.add(product);
-    notifyListeners();
-  }
-
-  void removeFromCart(Product product) {
-    _cartItems.remove(product);
-    notifyListeners();
-  }
-
-  void emptyCart() {
-    _cartItems.clear();
-    _discountPercent = 0.0;
-    notifyListeners();
-  }
-
-
-  bool get isEmpty => _cartItems.isEmpty;
-
-  double get totalPriceWithoutDiscount {
-    return _cartItems.fold(0.0, (sum, item) => sum + item.price);
-  }
-
-  double get totalPrice {
-    return totalPriceWithoutDiscount * (1 - _discountPercent / 100);
-  }
-
-  double get discountedAmount {
-    return totalPriceWithoutDiscount - (totalPriceWithoutDiscount * (1 - _discountPercent / 100));
-  }
-
-  void applyDiscount(BuildContext context, String discountCode) {
-    final couponProvider = Provider.of<CouponProvider>(context, listen: false);
-    final isCouponValid = couponProvider.applyCouponIfValid(discountCode);
-    
-    if (isCouponValid) {
-      _discountPercent = couponProvider.getCouponDiscount(discountCode);
-      notifyListeners();
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Cupón inválido o ya utilizado")),
-      );
-    }
-  }
-}
-*/
