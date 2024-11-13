@@ -55,7 +55,7 @@ class MainDrawer extends ConsumerWidget {
           ListTile(
             title: const Text('Historial de Compras'),
             onTap: () {
-              context.push('/purchase-history');
+              context.push('/purchase_history');
             },
           ),
           const Padding(

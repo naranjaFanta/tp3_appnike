@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:appnike/domain/purchases/purchase.dart';
 import 'package:appnike/presentation/providers/cart_provider.dart';
+import 'package:appnike/presentation/providers/user_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:appnike/presentation/providers/purchase_provider.dart';
@@ -24,13 +26,15 @@ class PaymentScreen extends ConsumerWidget {
 
       final newPurchase = Purchase(
         id: const Uuid().v4(),
-        date: DateTime.now(),
+        userEmail: ref.read(userProvider).email,
+        date: Timestamp.now(),
         items: items,
         totalAmount: totalAmount,
       );
 
       purchaseDB.add(newPurchase);
-      _purchaseProvider.addPurchase(items, totalAmount);
+      //TODO agregar a firestore
+      _purchaseProvider.addPurchase(items, totalAmount, ref);
 
       _cartProvider.emptyCart();
 
