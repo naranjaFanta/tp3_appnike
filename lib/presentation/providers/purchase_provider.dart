@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:appnike/domain/purchases/purchase.dart';
 import 'package:appnike/presentation/providers/user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
@@ -10,16 +11,16 @@ final AsyncNotifierProvider<PurchaseNotifier, List<Purchase>> purchaseProvider =
 
 class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
   final db = FirebaseFirestore.instance;
-  late final CollectionReference _purchaseRef;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  
+  late final CollectionReference _purchaseRef = db.collection('compras').withConverter<Purchase>(
+    fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!), 
+    toFirestore: (purchase, _) => purchase.toJson()
+  );
 
   @override
   Future<List<Purchase>> build() async {
-    _purchaseRef = db.collection('compras').withConverter<Purchase>(
-      fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!), 
-      toFirestore: (purchase, _) => purchase.toJson()
-    );
-    
-    return getAllPurchases();
+    return getCurrentUserPurchases();
   }
 
   Future<List<Purchase>> getAllPurchases () async {
@@ -27,11 +28,23 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
       fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!), 
       toFirestore: (purchase, _) => purchase.toJson()
     ).get();
-    
     final allData = data.docs.map((doc) => doc.data()).toList();
 
     return allData;
 
+  }
+
+  Future<List<Purchase>> getCurrentUserPurchases () async {
+    final User? user = auth.currentUser;
+
+    var data = await db.collection('compras')
+    .where("userEmail", isEqualTo: user?.email)
+    .withConverter<Purchase>(
+      fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!), 
+      toFirestore: (purchase, _) => purchase.toJson()
+    ).get();
+    
+    return data.docs.map((doc) => doc.data()).toList();
   }
 
   addPurchase(List<String> items, double totalAmount, WidgetRef ref) {
@@ -42,8 +55,7 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
       items: items,
       totalAmount: totalAmount,
     );
-    //state.add(newPurchase);
-    
+    state.value!.add(newPurchase);
     _purchaseRef
       .doc()
       .set(newPurchase)
