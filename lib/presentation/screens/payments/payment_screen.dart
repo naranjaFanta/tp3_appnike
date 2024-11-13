@@ -15,13 +15,11 @@ class PaymentScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _purchaseProvider = ref.read(purchaseProvider.notifier);
-    final _cartProvider = ref.read(cartProvider.notifier);
+    final _cartProvider = ref.watch(cartProvider.notifier);
+    final cartState = ref.watch(cartProvider);
     
     void processPayment() {
-      
-      //List<String> items = _purchaseProvider.items.map((item) => item.name).toList(); //["Nike Air Force 1", "Adidas Ultraboost"] si necesitamos ejemplo
       List<String> items = _cartProvider.getProductsNames();
-
       double totalAmount = _cartProvider.totalPrice;
 
       final newPurchase = Purchase(
@@ -57,8 +55,8 @@ class PaymentScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Text("Total original: \$${_cartProvider.totalPriceWithoutDiscount}"),
-          Text("Total con descuento: \$${_cartProvider.totalPrice}"),
+          Text("Total original: \$${cartState.fold(0.0, (sum, item) => sum + item.price)}"),
+          Text("Total con descuento: \$${cartState.fold(0.0, (sum, item) => sum + item.price) * (1 - _cartProvider.discountedAmount / 100)}"),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             

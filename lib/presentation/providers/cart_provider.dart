@@ -13,16 +13,17 @@ class CartNotifier extends Notifier<List<Product>> {
     return [];
   }
 
-  addToCart(Product product) {
-    state.add(product);
+  void addToCart(Product product) {
+    state = [...state, product];
   }
 
-  removeFromCart(Product product) {
-    state.remove(product);
+  void removeFromCart(Product product) {
+    //state.remove(product);
+    state = state.where((item) => item != product).toList();
   }
 
-  emptyCart() {
-    state.clear();
+  void emptyCart() {
+    state = [];
     _discountPercent = 0.0;
   }
 
