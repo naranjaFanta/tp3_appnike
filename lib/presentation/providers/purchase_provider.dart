@@ -31,7 +31,6 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
     final allData = data.docs.map((doc) => doc.data()).toList();
 
     return allData;
-
   }
 
   Future<List<Purchase>> getCurrentUserPurchases () async {
@@ -43,8 +42,14 @@ class PurchaseNotifier extends AsyncNotifier<List<Purchase>> {
       fromFirestore: (snapshot, _) => Purchase.fromJson(snapshot.data()!), 
       toFirestore: (purchase, _) => purchase.toJson()
     ).get();
-    
+
     return data.docs.map((doc) => doc.data()).toList();
+  }
+
+  reload() async {
+    state.value!.clear();
+    List<Purchase> list = await getCurrentUserPurchases();
+    state.value?.addAll(list);
   }
 
   addPurchase(List<String> items, double totalAmount, WidgetRef ref) {

@@ -1,3 +1,4 @@
+import 'package:appnike/presentation/providers/purchase_provider.dart';
 import 'package:appnike/presentation/providers/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class AuthService {
         password: password,
       );
       ref.read(userProvider.notifier).login(userCredential.user!);
+      ref.read(purchaseProvider.notifier).reload();
       context.go('/');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
