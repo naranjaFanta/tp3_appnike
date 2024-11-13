@@ -9,6 +9,7 @@ class MainDrawer extends ConsumerWidget {
   MainDrawer({super.key});
 
   final AuthService _authService = AuthService();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Drawer(
@@ -22,14 +23,13 @@ class MainDrawer extends ConsumerWidget {
                 color: Color.fromRGBO(0, 0, 0, 1),
               ),
               margin: const EdgeInsets.all(0),
-              child: 
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: SvgPicture.asset(
-                    'assets/svg/logo.svg',
-                    colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                  ),
-                )
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: SvgPicture.asset(
+                  'assets/svg/logo.svg',
+                  colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                ),
+              ),
             ),
           ),
           ListTile(
@@ -51,23 +51,11 @@ class MainDrawer extends ConsumerWidget {
             onTap: () {
               context.push('/discounts');
             },
-          ),/**
-          ListTile(
-            title: const Text('Profile Screen'),
-            onTap: () {
-              context.push('/profile');
-            },
           ),
           ListTile(
-            title: const Text('Profile Form'),
+            title: const Text('Historial de Compras'),
             onTap: () {
-              context.push('/profile/new');
-            },
-          ), */
-          ListTile(
-            title: const Text('Carrito de Compras'),
-            onTap: () {
-              context.pushNamed('/cart'); // Usa el nombre de la ruta
+              context.push('/purchase-history');
             },
           ),
           const Padding(
