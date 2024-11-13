@@ -30,50 +30,60 @@ class ProductDetail extends ConsumerWidget {
                           child: Image.network(snapshot.data!.image),
                         ),
                         const SizedBox(height: 16),
-                        if ((snapshot.data!.isNew ?? false))
-                          const Padding(
-                            padding: EdgeInsets.only(bottom: 8),
-                            child: Center(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 18),
                               child: Text(
-                                'Nuevo',
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 215, 195, 104),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
+                                '\$${snapshot.data!.price}',
+                                style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold)
+                              ),
+                            ),
+                            if ((snapshot.data!.isNew ?? false))
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            child: Text(
+                              'Nuevo',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 215, 195, 104),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
                               ),
                             ),
                           ),
-                        Center(
-                          child: Text(snapshot.data!.name,
-                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                          ],
                         ),
-                        const SizedBox(height: 8),
-                        Center(child: Text(snapshot.data!.description)),
-                        const SizedBox(height: 16),
-                        Center(
-                          child: Text('Precio: \$${snapshot.data!.price}',
-                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                        ),
-                        const Spacer(),
-                        SizedBox(
-                          width: MediaQuery.sizeOf(context).width,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              ref.read(cartProvider.notifier).addToCart(snapshot.data!);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Producto agregado al carrito')),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
+                        Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 18),
+                              child: Text(snapshot.data!.name,
+                                style: const TextStyle(fontSize: 24)
+                              ),
                             ),
-                            child: const Text('Agregar al carrito'),
-                          ),
+                        const SizedBox(height: 8),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                          child: Text(snapshot.data!.description),
                         ),
+                        
+                        const SizedBox(height: 25),
                       ],
                   ),
-
+                  bottomNavigationBar:Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        ref.read(cartProvider.notifier).addToCart(snapshot.data!);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Producto agregado al carrito')),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
+                      child: const Text('Agregar al carrito'),
+                    ),
+                  ),
           );
         } else {
           return Scaffold(
